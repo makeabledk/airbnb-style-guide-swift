@@ -22,7 +22,7 @@ let package = Package(
         ]),
       dependencies: [
         "AirbnbSwiftFormatTool",
-        "SwiftFormat",
+        "swiftformat",
         "SwiftLintBinary",
       ]),
 
@@ -41,14 +41,14 @@ let package = Package(
       dependencies: ["AirbnbSwiftFormatTool"]),
 
     .binaryTarget(
-      name: "SwiftFormat",
-      url: "https://github.com/calda/SwiftFormat/releases/download/0.54-beta-5/SwiftFormat.artifactbundle.zip",
-      checksum: "7447986db45a51164d23672c07f971406a4c0589b0c423fcb85e95ed8f8e7e48"),
+      name: "swiftformat",
+      url: "https://github.com/calda/SwiftFormat/releases/download/0.55-beta-2/SwiftFormat.artifactbundle.zip",
+      checksum: "f7ba281b879af7920e368144117269ba00abcc589b6d36f47ea0c21e62410a7c"),
 
     .binaryTarget(
       name: "SwiftLintBinary",
-      url: "https://github.com/realm/SwiftLint/releases/download/0.53.0/SwiftLintBinary-macos.artifactbundle.zip",
-      checksum: "03416a4f75f023e10f9a76945806ddfe70ca06129b895455cc773c5c7d86b73e"),
+      url: "https://github.com/realm/SwiftLint/releases/download/0.55.1/SwiftLintBinary-macos.artifactbundle.zip",
+      checksum: "722a705de1cf4e0e07f2b7d2f9f631f3a8b2635a0c84cce99f9677b38aa4a1d6"),
   ])
 
 // Emit an error on Linux, so Swift Package Manager's platform support detection doesn't say this package supports Linux
