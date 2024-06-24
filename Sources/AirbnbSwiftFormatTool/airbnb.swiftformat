@@ -29,16 +29,16 @@
 --organizetypes class,struct,enum,extension,actor # organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
---redundanttype inferred # redundantType
+--redundanttype inferred # redundantType, propertyType
 --typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --emptybraces spaced # emptyBraces
 --someAny disabled # opaqueGenericParameters
---elseposition same-line #elseOnSameLine
---guardelse next-line #elseOnSameLine
---onelineforeach convert #preferForLoop
---shortoptionals always #typeSugar
---semicolons never #semicolons
---doccomments preserve #docComments
+--elseposition same-line # elseOnSameLine
+--guardelse next-line # elseOnSameLine
+--onelineforeach convert # preferForLoop
+--shortoptionals always # typeSugar
+--semicolons never # semicolons
+--doccomments preserve # docComments
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
 --maxwidth 130 # wrap
@@ -77,6 +77,7 @@
 --rules redundantVoidReturnType
 --rules redundantOptionalBinding
 --rules redundantInternal
+--rules redundantProperty
 --rules unusedArguments
 --rules spaceInsideBrackets
 --rules spaceInsideBraces
@@ -100,6 +101,8 @@
 --rules preferForLoop
 --rules conditionalAssignment
 --rules wrapMultilineConditionalAssignment
---rules blankLineAfterMultilineSwitchCase
---rules consistentSwitchStatementSpacing
+--rules blankLineAfterSwitchCase
+--rules consistentSwitchCaseSpacing
 --rules semicolons
+--rules propertyType
+--rules blankLinesBetweenChainedFunctions
