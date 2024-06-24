@@ -26,7 +26,7 @@ colon:
 vertical_whitespace:
     max_empty_lines: 2
 
-indentation: 2
+indentation: 4
 
 custom_rules:
   no_objcMembers:
