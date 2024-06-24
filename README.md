@@ -23,6 +23,72 @@ Note that brevity is not a primary goal. Code should be made more concise only i
   * For rules that don't directly change the format of the code, we should have a lint rule that throws a warning.
   * Exceptions to these rules should be rare and heavily justified.
 
+## Setup
+<details>
+<summary>Using tuist</summary>
+
+Add the following dependency (DO NOT add it to any targets).
+```swift
+.remote(
+    url: "git@github.com:makeabledk/airbnb-style-guide-swift.git",
+    requirement: .upToNextMajor(from: .init(0, 1, 4))
+),
+```
+Then include the following two scripts under build scripts:
+```swift
+.pre(
+    script: #"""
+    "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/airbnb-style-guide-swift/resources/xcode_settings.bash"
+    """#,
+    name: "Configure Xcode format settings",
+    basedOnDependencyAnalysis: false,
+    runForInstallBuildsOnly: false
+),
+.pre(
+    script: #"""
+    unset SDKROOT
+    package_path="${BUILD_DIR%/Build/*}/SourcePackages/checkouts/airbnb-style-guide-swift/"
+    source_path="${SRCROOT}/\#(projectName)/"
+    swift package --package-path "$package_path" --allow-writing-to-directory "$source_path" --allow-writing-to-package-directory format --paths "$source_path"
+    """#,
+    name: "Linting and Formatting",
+    outputPaths: ["$(SRCROOT)/TemplateV2Ios/"],
+    basedOnDependencyAnalysis: false,
+    runForInstallBuildsOnly: false
+),
+```
+</details>
+
+<details>
+<summary>Manual setup</summary>
+
+Include the package (DO NOT add it to any targets)
+SPM:
+```swift
+dependencies: [
+  .package(url: "git@github.com:makeabledk/airbnb-style-guide-swift.git", from: "0.1.4"),
+]
+```
+And then add the following two build script under build phases:
+
+Configure Xcode format settings
+```shell
+${BUILD_DIR%/Build/*}/SourcePackages/checkouts/airbnb-style-guide-swift/resources/xcode_settings.bash
+```
+
+Linting and Formatting:
+```shell
+unset SDKROOT
+package_path="${BUILD_DIR%/Build/*}/SourcePackages/checkouts/airbnb-style-guide-swift/"
+source_path="${SRCROOT}/<<PROJECT_NAME>>"
+swift package --package-path "$package_path" --allow-writing-to-directory "$source_path" --allow-writing-to-package-directory format --paths "$source_path"
+```
+"Based on dependency analysis" should be disabled for both.
+The second one should include `$(SRCROOT)/TemplateV2Ios` under Output files
+
+Where `<<PROJECT_NAME>>` is replaced by the name of the root folder of your project containing the swift files.
+</details>
+
 ## Swift Package Manager command plugin
 
 This repo includes a Swift Package Manager command plugin that you can use to automatically reformat or lint your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
