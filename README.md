@@ -89,6 +89,32 @@ The second one should include `$(SRCROOT)/TemplateV2Ios` under Output files
 Where `<<PROJECT_NAME>>` is replaced by the name of the root folder of your project containing the swift files.
 </details>
 
+<details>
+<summary>Extra legacy setup</summary>
+
+⚠️**This should only be done when adding formatting/linting to existing projects**⚠️
+
+⚠️**If you are unhappy with the configuration, please ask Martin or Michael, we will then discuss it between all iOS developers where the majority decides**⚠️
+
+Some older projects might be incompatible with the newer rules. This is a guide to how the lint file can be replaced to disable some incompatible rules.
+
+In the build script:
+```shell
+unset SDKROOT
+package_path="${BUILD_DIR%/Build/*}/SourcePackages/checkouts/airbnb-style-guide-swift/"
+source_path="${SRCROOT}/<<PROJECT_NAME>>"
+swift package --package-path "$package_path" --allow-writing-to-directory "$source_path" --allow-writing-to-package-directory format --paths "$source_path"
+```
+Replace the last line with:
+```shell
+swift package --package-path "$package_path" --allow-writing-to-directory "$source_path" --allow-writing-to-package-directory format --swift-lint-config "${SRCROOT}/baseSwiftlint.yml" --paths "$source_path"
+```
+Then place [this](Sources/AirbnbSwiftFormatTool/swiftlint.yml) file at the root of your project and name it `baseSwiftlint.yml`.
+It is then possible to remove/modify/add rules in this file. 
+
+Note that this will completely override the linting configuration, but not the format configuration.
+</details>
+
 ## Swift Package Manager command plugin
 
 This repo includes a Swift Package Manager command plugin that you can use to automatically reformat or lint your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
