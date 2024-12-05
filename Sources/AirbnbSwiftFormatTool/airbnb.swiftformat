@@ -28,8 +28,9 @@
 --structthreshold 20 # organizeDeclarations
 --enumthreshold 20 # organizeDeclarations
 --organizetypes class,struct,enum,extension,actor # organizeDeclarations
---visibilityorder beforeMarks,instanceLifecycle,open,public,package,internal,fileprivate,private # organizeDeclarations
---typeorder nestedType,staticProperty,staticPropertyWithBody,classPropertyWithBody,swiftUIPropertyWrapper,instanceProperty,instancePropertyWithBody,staticMethod,classMethod,instanceMethod # organizeDeclarations
+--organizationmode type # organizeDeclarations
+--visibilityorder open,public,package,internal,fileprivate,private # organizeDeclarations
+--typeorder beforeMarks,nestedType,staticProperty,staticPropertyWithBody,classPropertyWithBody,swiftUIPropertyWrapper,instanceProperty,instancePropertyWithBody,instanceLifecycle,staticMethod,classMethod,overriddenMethod,instanceMethod # organizeDeclarations
 --sortswiftuiprops first-appearance-sort #organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
@@ -45,9 +46,10 @@
 --shortoptionals always # typeSugar
 --semicolons never # semicolons
 --doccomments preserve # docComments
+--stripunusedargs closure-only # unusedArguments
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
---maxwidth 130 # wrap
+--maxwidth 200 # wrap
 
 # rules
 --rules anyObjectProtocol
